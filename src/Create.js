@@ -8,6 +8,7 @@ const Create = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        setIsPending(true);
         const blog = { title, body, author };
         const abortCont = new AbortController();
         fetch('http://localhost:8000/blogs', {
