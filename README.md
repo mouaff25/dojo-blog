@@ -1,7 +1,5 @@
 # Blog Dojo React Application
 
-![Blog Dojo Logo/Image]
-
 ## Overview
 
 Welcome to the Blog Dojo React application! This project is a small React application that allows users to view and create blogs. It uses a mock database provided by json-server for data storage.
@@ -11,14 +9,13 @@ Welcome to the Blog Dojo React application! This project is a small React applic
 - View a list of existing blogs
 - Create new blogs
 - Mock database using json-server for data storage
-- [Add any other features here]
 
 ## Prerequisites
 
 Before you start, make sure you have the following installed:
 
-- [Node.js](https://nodejs.org/) (v14.x or later)
-- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
 
 ## Getting Started
 
