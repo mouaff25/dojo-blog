@@ -9,15 +9,22 @@ const Create = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         const blog = { title, body, author };
+        const abortCont = new AbortController();
         fetch('http://localhost:8000/blogs', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(blog)
-        }).then(() => {
+        }, abortCont.signal).then(() => {
             console.log('new blog added');
             setIsPending(false);
         }).catch((err) => {
-            console.log(err.message);
+            if (err.name === 'AbortError') {
+                console.log('fetch aborted');
+            }
+            else {
+                console.log(err.message);
+                setIsPending(false);
+            }
         });
     }
 
@@ -34,7 +41,8 @@ const Create = () => {
                     <option value="mario">mario</option>
                     <option value="yoshi">yoshi</option>
                 </select>
-                <button>Add Blog</button>
+                { !isPending && <button>Add Blog</button> }
+                { isPending && <button disabled>Adding Blog...</button> }
             </form>
         </div>
     );
