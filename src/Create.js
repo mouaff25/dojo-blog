@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Create = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('mario');
     const [isPending, setIsPending] = useState(false);
+    const history = useHistory();
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -18,6 +20,8 @@ const Create = () => {
         }, abortCont.signal).then(() => {
             console.log('new blog added');
             setIsPending(false);
+            history.push('/');
+            history.go(0);
         }).catch((err) => {
             if (err.name === 'AbortError') {
                 console.log('fetch aborted');
