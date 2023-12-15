@@ -4,10 +4,27 @@ const Create = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('mario');
+    const [isPending, setIsPending] = useState(false);
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        const blog = { title, body, author };
+        fetch('http://localhost:8000/blogs', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(blog)
+        }).then(() => {
+            console.log('new blog added');
+            setIsPending(false);
+        }).catch((err) => {
+            console.log(err.message);
+        });
+    }
+
     return (
         <div className="create">
             <h2>Add a New Blog</h2>
-            <form>
+            <form onSubmit={submitHandler}>
                 <label>Blog title:</label>
                 <input type="text" required value={title} onChange={(e) => setTitle(e.target.value)}></input>
                 <label>Blog body:</label>
