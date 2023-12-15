@@ -7,14 +7,19 @@ const useFetch = (url) => {
 
     useEffect(() => {
         const fetchData = async () => {
+            const abortCont = new AbortController();
             try {
-                const res = await fetch(url);
+                const res = await fetch(url, abortCont.signal);
                 const json = await res.json();
                 setData(json);
                 setLoading(false);
             } catch (error) {
-                setError(error.message);
-                setLoading(false);
+                if (error.name === 'AbortError') {
+                    console.log('fetch aborted');
+                } else {
+                    setError(error.message);
+                    setLoading(false);
+                }
             }
         };
         fetchData();
